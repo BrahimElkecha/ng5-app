@@ -25,3 +25,14 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Directives
+
+Attribute VS structural directives
+Attribute set on an element just like an attribute. it only affect / change the element they are added to.
+Structural directives change the structure of the DOM around the element (add / remove)
+And should start with * exemple  *ngIF *ngFor .
+only one structural directive allowed to use in the same element.
+
+creating a directive 
+import Directive from @angular/core ,use selector '[appDirectiveTest]'

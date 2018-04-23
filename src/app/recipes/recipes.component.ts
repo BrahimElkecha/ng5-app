@@ -11,7 +11,7 @@ import { RecipeService } from './recipe.service';
 
 export class RecipesComponent implements OnInit {
   selectedRecipe: Recipe;
-  recipeInformation: Recipe = new Recipe('Chicken', 'test', 'test');  
+  recipeInformation: Recipe = new Recipe('Chicken', 'test', 'test', []);
 
   constructor(private recipeService: RecipeService) {
   }

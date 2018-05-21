@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core'
-import { Http } from '@angular/http';
+import { Http, Headers, Response } from '@angular/http';
 import { Subject } from 'rxjs/Subject'
+import { Observable } from 'rxjs/Observable'
+import 'rxjs/Rx'
 
 import * as cheerio from 'cheerio';
 import { Recipe } from './recipe.model'
@@ -17,17 +19,7 @@ export class RecipeService {
     	  'Morrocan chicken tajin',
     	  'https://assets.epicurious.com/photos/560ea0997b55306961bfee78/6:4/w_620%2Ch_413/106218.jpg',
     	  [new Ingredient('meat', 2), new Ingredient('banana', 4)]
-    ),
-    new Recipe('Chicken',
-    	  'Morrocan chicken',
-    	  'https://blog.bedbathandbeyond.com/wp-content/uploads/2013/12/Morrocan-Chicken.jpg',
-    	  [new Ingredient('buns', 6),
-    	  new Ingredient('fries', 4)]),
-    new Recipe('Couscous',
-    	'Morrocan couscous',
-    	'http://www.authenticworldfood.com/data/r3/00000153-00000327.jpg',
-    	[new Ingredient('burger', 2),
-    	new Ingredient('potatos', 5)])
+    )
   ];
 
   constructor(private shoppingListService: ShoppingListService,
@@ -37,7 +29,7 @@ export class RecipeService {
     return this.http.get(`https://www.hellofresh.com/menus/`);
   }
 
-  getRecipes() {
+  /*getRecipes() {
     this.scrapRecipes().subscribe((response) => {
       const $ = cheerio.load(response.text());
       const posts = $('.fela-fdar8y.fela-1pjkygk .fela-xeffhz .fela-1vac6gd');
@@ -56,6 +48,57 @@ export class RecipeService {
       });
       this.recipesChanged.next(this.recipes.slice())
     });
+  }
+  */
+
+  /*putRecipes(recipes: Recipe[]) {
+    const headers = new Headers({
+      'Content-type': 'application/json'
+    })
+    return this.http.put('https://http-angular-6c553.firebaseio.com/data.json',
+      recipes,
+      { headers: headers }
+    );
+  } */
+
+  // getRecipes() {
+  //   return this.http.get(`https://http-angular-6c553.firebaseio.com/data.json`)
+  //     .subscribe((response: Response) => {
+  //       this.recipes = response.json()
+  //       this.recipesChanged.next(this.recipes.slice())
+  //     })
+  // }
+
+  /*getRecipes() {
+    return this.http.get(`https://http-angular-6c553.firebaseio.com/data.json`)
+      .map((response: Response) => {
+        this.recipes = response.json()
+        // this.recipesChanged.next(this.recipes.slice())
+        return this.recipes
+      })
+      .catch(
+        (error: Response) => {
+          return Observable.throw('someThing went wrong' + error);
+        }
+      )
+  }*/
+
+  getRecipes() {
+    return this.recipes;
+  }
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice())
+  }
+
+  getAppName() {
+    return this.http.get('https://http-angular-6c553.firebaseio.com/appName.json')
+      .map(
+        (response: Response) => {
+          return response.json()
+        }
+      )
   }
 
   getRecipeById(index: number) {
@@ -79,5 +122,5 @@ export class RecipeService {
   updateRecipe(index: number, newRecipe: Recipe) {
     this.recipes[index] = newRecipe;
     this.recipesChanged.next(this.recipes.slice())
-  }
+  } 
 }

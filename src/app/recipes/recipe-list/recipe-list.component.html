@@ -4,7 +4,12 @@
   </div>
 </div>
 <hr>
-
+<div class="row">
+  <div class="col-xs-12">
+    <h1>{{ appName | async }}</h1>
+  </div>
+</div>
+<hr>
 <div class="row">
   <div class="col-xs-12">
     <app-recipe-item  *ngFor="let recipeEl of recipes; let i=index"

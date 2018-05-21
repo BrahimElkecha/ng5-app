@@ -18,6 +18,7 @@ import { DropdownDirective } from './shared/dropdown.directive';
 
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { RecipeService } from './recipes/recipe.service';
+import { DataStorageService } from './shared/data-storage.service';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -42,7 +43,7 @@ import { AppRoutingModule } from './app-routing.module';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [ShoppingListService, RecipeService],
+  providers: [ShoppingListService, RecipeService, DataStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

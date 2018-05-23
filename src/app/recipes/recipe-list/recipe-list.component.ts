@@ -5,6 +5,7 @@ import { Response } from '@angular/http'
 
 import { Recipe } from '../recipe.model'
 import { RecipeService } from '../recipe.service'
+import { DataStorageService } from '../../shared/data-storage.service'
 
 @Component({
   selector: 'app-recipe-list',
@@ -19,9 +20,12 @@ export class RecipeListComponent implements OnInit, OnDestroy {
 
   constructor(private recipeService: RecipeService,
               private router: Router,
-              private route: ActivatedRoute) {}
+              private route: ActivatedRoute,
+              private dataStorageService: DataStorageService) {}
 
   ngOnInit() {
+    this.dataStorageService.getRecipes();
+
     /*this.recipeService.getRecipes()
       .subscribe((recipes: any[]) => {
         this.recipeService.setRecipes(recipes)
